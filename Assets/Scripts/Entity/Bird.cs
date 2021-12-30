@@ -24,12 +24,19 @@ public class Bird : MonoSingleton<Bird>
             Movement();
         }
     }
-    
-    private void OnTriggerEnter2D(Collider2D other) 
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        BirdDie?.Invoke();
-        GameController.Instance.IsGameStart = false;
-        rigidbody2d.gravityScale = 0;
+        if(!other.GetComponent<Pipe>())
+        {
+            BirdDie?.Invoke();
+            GameController.Instance.IsGameStart = false;
+            rigidbody2d.gravityScale = 0;
+        }
+        else
+        {
+            ScoreController.Instance.Increase();
+        }
     }
 
     public void OnStartGame()

@@ -25,4 +25,9 @@ public class PipeController : MonoSingleton<PipeController>
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        ScoreController.Instance.Increase();
+    }
+
 }
